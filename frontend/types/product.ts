@@ -8,6 +8,7 @@ export interface SourceData {
   unilog_brand: string;
   dib_brand: string;
   part_manuf: string;
+  raw_columns?: Record<string, any>;
 }
 
 export interface EntityMatchInfo {

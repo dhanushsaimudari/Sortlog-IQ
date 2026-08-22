@@ -92,18 +92,21 @@ export function generateLocalProductFromRow(row: Record<string, any>, index: num
 
   const now = new Date().toISOString();
 
+  const srcData = {
+    source_row_id: index + 1,
+    mfg_part_num: mpn,
+    part_desc: desc,
+    e1_brand: brand,
+    unilog_brand: brand,
+    dib_brand: brand,
+    part_manuf: manuf,
+    raw_columns: row
+  };
+
   return {
     id: prodId,
-    source_row_id: index + 1,
-    source_data: {
-      mfg_part_num: mpn,
-      part_desc: desc,
-      e1_brand: brand,
-      unilog_brand: brand,
-      dib_brand: brand,
-      part_manuf: manuf,
-      raw_columns: row
-    },
+    source: srcData,
+    source_data: srcData,
     identity: {
       mfg_part_num: mpn,
       manufacturer: { raw_value: manuf, canonical_value: manuf.toUpperCase(), confidence: 0.98, status: 'NORMALIZED' },
@@ -132,6 +135,12 @@ export function generateLocalProductFromRow(row: Record<string, any>, index: num
         `Registered Trademark Brand: ${brand.toUpperCase()}®`
       ]
     },
+    features: [
+      `Heavy Duty Industrial Spec ${fineCls}`,
+      `Manufacturer Part Number: ${mpn}`,
+      `Canonical Manufacturer: ${manuf.toUpperCase()}`,
+      `Registered Trademark Brand: ${brand.toUpperCase()}®`
+    ],
     attributes: [
       {
         sequence: 1,
@@ -164,14 +173,14 @@ export function generateLocalProductFromRow(row: Record<string, any>, index: num
         explanation: { raw_source: desc, ai_interpretation: 'Material Spec', lov_status: 'Matched (304 Stainless Steel)', uom_status: 'N/A', validation_result: 'PASS' }
       }
     ],
+    commerce: {},
+    dimensions: {
+      length: {}, height: {}, width: {}, weight: {}, volume: {}
+    },
+    assets: [],
     quality: {
       overall_score: 94.5,
-      status: 'EXCELLENT',
-      completeness_score: 96.0,
-      accuracy_score: 95.0,
-      consistency_score: 93.0,
-      weights: { identity: 0.3, taxonomy: 0.2, attributes: 0.3, content: 0.2 },
-      field_scores: { mfg_part_num: 100, manufacturer: 95, brand: 95, classpath: 95 }
+      status: 'EXCELLENT'
     },
     validations: [
       {
@@ -197,7 +206,12 @@ export function generateLocalProductFromRow(row: Record<string, any>, index: num
         auto_fix_available: false
       }
     ],
+    evidence: [],
     requires_review: false,
+    audit_trail: [
+      { timestamp: now, event_type: 'ENRICHMENT_COMPLETE', actor: 'SYSTEM', description: `Enriched product ${prodId}` }
+    ]
+  };
     created_at: now,
     updated_at: now
   };
