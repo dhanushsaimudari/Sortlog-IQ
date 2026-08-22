@@ -196,8 +196,8 @@ export default function ProductDetailPage() {
             />
           ))}
 
-          {!product.identity.brand.status.includes("NORMALIZED") &&
-           !product.identity.manufacturer.status.includes("NORMALIZED") &&
+          {!product.identity.brand.status?.includes("NORMALIZED") &&
+           !product.identity.manufacturer.status?.includes("NORMALIZED") &&
            product.validations.filter(v => v.auto_fix_available).length === 0 && (
             <div className="p-8 text-center text-xs font-mono text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg">
               No pending auto-fix transformations for this item. All fields are compliant.
