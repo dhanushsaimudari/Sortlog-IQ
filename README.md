@@ -31,7 +31,7 @@ Export REAL UNILOG OUTPUT
 ### Core Philosophy:
 > **AI proposes. Rules validate. Evidence supports. Humans decide.**
 
-The application explicitly separates **Semantic Intelligence** (Google Gemini API for taxonomy classification, attribute extraction, and multi-channel description synthesis) from **Deterministic Intelligence** (Python rules, LOV lookup tables, UOM space normalization, Pint standards, content validation, and auto-fix rules).
+The application explicitly separates **Semantic Intelligence** (IBM watsonx.ai / Google Gemini API for taxonomy classification, attribute extraction, and multi-channel description synthesis) from **Deterministic Intelligence** (Python rules, LOV lookup tables, UOM space normalization, Pint standards, content validation, and auto-fix rules).
 
 ---
 
@@ -67,7 +67,7 @@ backend/
 │   ├── schemas/                  # Pydantic Schemas (Product, Validation, Review, Evaluation)
 │   ├── services/                 # Business Services (ingestion, processing, quality, review, export)
 │   ├── enrichment/               # Manufacturer, Brand, Classification, Attributes, Descriptions
-│   ├── ai/                       # Gemini AI Client, Prompts, Response Parser
+│   ├── ai/                       # WatsonX & Gemini AI Clients, Prompts, Response Parser
 │   ├── validation/               # Validation Engine, Rules, LOV, UOM, Content, Auto-Fix
 │   ├── evaluation/               # Ground Truth Benchmark Evaluator & Discrepancy Matrix
 │   ├── evidence/                 # PDF Bounding Box Coordinates & Document Resolver
@@ -81,7 +81,7 @@ backend/
 
 ---
 
-## 6. How to Run the Application
+## 6. How to Run Locally
 
 ### 1. Environment & Dependencies Setup
 
@@ -91,7 +91,7 @@ Copy `.env.example` to `.env`:
 cp .env.example .env
 ```
 
-Set your `GEMINI_API_KEY` or `WATSONX_API_KEY` (Optional; deterministic fallbacks run if key is omitted). Note that `.env` is protected and ignored by `.gitignore`.
+Set your `WATSONX_API_KEY` or `GEMINI_API_KEY` (Optional; deterministic fallbacks run if key is omitted). Note that `.env` is protected and ignored by `.gitignore`.
 
 Install backend dependencies:
 
@@ -120,7 +120,32 @@ Open `http://localhost:3000` to access the SORTOLOG IQ web interface.
 
 ---
 
-## 7. Quality Assurance & Automated Testing
+## 7. Cloud Deployment Guide (Vercel & Render)
+
+### A. Frontend Deployment (Vercel)
+
+1. Connect your GitHub repository `Sortlog-IQ` to Vercel.
+2. Set **Root Directory**: `frontend`.
+3. Set **Framework Preset**: `Next.js`.
+4. Configure Environment Variable:
+   - `NEXT_PUBLIC_API_BASE_URL`: `https://<your-backend-domain>/api/v1`
+
+### B. Backend Deployment (Render / Railway)
+
+1. Connect your repository `Sortlog-IQ` to Render as a Web Service.
+2. Build Settings:
+   - **Environment**: `Python 3` (Python version 3.11.9 pinned via `.python-version`)
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `python run_backend.py`
+3. Environment Variables:
+   - `APP_ENV`: `production`
+   - `FRONTEND_URL`: `https://<your-vercel-frontend-domain>`
+   - `WATSONX_API_KEY`: *(Optional Primary AI Key)*
+   - `GEMINI_API_KEY`: *(Optional Secondary AI Key)*
+
+---
+
+## 8. Quality Assurance & Automated Testing
 
 ### Running Backend & API Test Suite
 To run all automated backend unit, API, e2e, and 1,000-row scale tests:
@@ -146,11 +171,10 @@ npm test
 
 ---
 
-## 8. Deployment Readiness
+## 9. Deployment Readiness
 
 * **Secrets & Credentials:** Sensitive environment variables (`.env`) are strictly protected via `.gitignore`.
 * **Clean Build:** All temporary test cache files (`.pytest_cache`, `pytest-cache-files-*`), node_modules, and build outputs are excluded from repository tracking.
-* **Production Build:**
-  - Backend: Run with `uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4`
-  - Frontend: Run `npm run build` and `npm start` inside `frontend/`
-
+* **Production Deployment:**
+  - Backend: Handled automatically via `Procfile` / `render.yaml` or `python run_backend.py`
+  - Frontend: Handled automatically via Next.js on Vercel
