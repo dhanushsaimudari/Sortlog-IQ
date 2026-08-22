@@ -11,6 +11,6 @@ from app.main import app
 from app.core.config import settings
 
 if __name__ == "__main__":
-    port = getattr(settings, 'BACKEND_PORT', settings.PORT)
-    print(f"Starting SORTOLOG IQ FastAPI Backend Server on http://localhost:{port} ...")
+    port = int(os.environ.get("PORT", getattr(settings, 'BACKEND_PORT', 8000)))
+    print(f"Starting SORTOLOG IQ FastAPI Backend Server on http://0.0.0.0:{port} ...")
     uvicorn.run(app, host=settings.HOST, port=port)

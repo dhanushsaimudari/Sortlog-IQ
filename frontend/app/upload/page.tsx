@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
+import { FileText, Image as ImageIcon, FileSpreadsheet, Upload, AlertCircle, ArrowRight, Trash2, CheckCircle2, Clock } from 'lucide-react';
 import { Card, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
