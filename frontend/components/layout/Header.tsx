@@ -93,7 +93,7 @@ export const Header: React.FC = () => {
       if (res.ok) {
         setRemainingSeconds(7200);
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleExportCsv = async () => {
@@ -129,8 +129,8 @@ export const Header: React.FC = () => {
     remainingSeconds <= 300
       ? 'bg-rose-100 text-rose-800 border-rose-400 dark:bg-rose-950 dark:text-rose-300 animate-pulse'
       : remainingSeconds <= 1800
-      ? 'bg-amber-100 text-amber-800 border-amber-400 dark:bg-amber-950 dark:text-amber-300'
-      : 'bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-950 dark:text-slate-300';
+        ? 'bg-amber-100 text-amber-800 border-amber-400 dark:bg-amber-950 dark:text-amber-300'
+        : 'bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-950 dark:text-slate-300';
 
   return (
     <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 flex items-center justify-between font-mono text-xs transition-colors duration-200">

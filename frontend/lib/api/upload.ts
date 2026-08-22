@@ -29,7 +29,7 @@ export async function uploadCatalogFile(
   const data = await res.json();
   if (!data.job_id) throw new Error('Backend did not return an import job ID.');
 
-  for (;;) {
+  for (; ;) {
     const status = await checkUploadProgress(data.job_id);
     onProgress?.(status);
     if (status.status === 'COMPLETED' || status.status === 'FAILED') return status;
