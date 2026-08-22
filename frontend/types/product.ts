@@ -185,4 +185,7 @@ export interface Product {
   requires_review: boolean;
   is_demo_data?: boolean;
   audit_trail: AuditEventLog[];
+  created_at?: string;
+  updated_at?: string;
+  status?: string;
 }

@@ -10,46 +10,66 @@ export interface DiscrepancyItem {
 }
 
 export interface DomainScores {
-  identifiers: number;
-  brand_normalization: number;
-  taxonomy_classification: number;
-  attribute_extraction: number;
-  description_generation: number;
-  digital_assets: number;
+  identifiers?: number;
+  brand_normalization?: number;
+  taxonomy_classification?: number;
+  attribute_extraction?: number;
+  description_generation?: number;
+  digital_assets?: number;
+  classification?: number;
+  manufacturer?: number;
+  brand?: number;
+  lov_compliance?: number;
+  uom_compliance?: number;
+  character_compliance?: number;
+  completeness?: number;
+  descriptions?: number;
+  evidence?: number;
+  [key: string]: number | undefined;
 }
 
 export interface MetricCategoryBreakdown {
-  EXACT: number;
-  NORM: number;
-  FMT_MISMATCH: number;
-  MFR_MISMATCH: number;
-  BRAND_MISMATCH: number;
-  CLASS_MISMATCH: number;
-  UOM_MISMATCH: number;
-  MISSING: number;
-  EXTRA: number;
-  WRONG: number;
+  EXACT?: number;
+  NORM?: number;
+  FMT_MISMATCH?: number;
+  MFR_MISMATCH?: number;
+  BRAND_MISMATCH?: number;
+  CLASS_MISMATCH?: number;
+  UOM_MISMATCH?: number;
+  MISSING?: number;
+  EXTRA?: number;
+  WRONG?: number;
+  EXACT_MATCH?: number;
+  NORMALIZED_MATCH?: number;
+  FORMATTING_MISMATCH?: number;
+  MISSING_VALUE?: number;
+  VALUE_MISMATCH?: number;
+  INVALID_UOM?: number;
+  [key: string]: number | undefined;
 }
 
 export interface EvaluationResult {
   eval_id: string;
-  timestamp: string;
+  timestamp?: string;
   products_evaluated: number;
   total_evaluated: number;
   overall_accuracy: number;
-  precision_score: number;
-  recall_score: number;
-  f1_score: number;
-  rouge_l_score: number;
-  lov_compliance_rate: number;
-  uom_compliance_rate: number;
-  character_compliance_rate: number;
-  classification_accuracy: number;
-  completeness_rate: number;
-  autofix_success_rate: number;
+  precision_score?: number;
+  recall_score?: number;
+  f1_score?: number;
+  rouge_l_score?: number;
+  lov_compliance_rate?: number;
+  uom_compliance_rate?: number;
+  character_compliance_rate?: number;
+  classification_accuracy?: number;
+  completeness_rate?: number;
+  autofix_success_rate?: number;
   auto_fix_success_rate?: number;
   domain_scores: DomainScores;
   category_counts: MetricCategoryBreakdown;
   discrepancies: DiscrepancyItem[];
   is_demo_data?: boolean;
+  run_id?: string;
+  dataset_name?: string;
+  created_at?: string;
 }
