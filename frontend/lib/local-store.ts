@@ -210,8 +210,7 @@ export function generateLocalProductFromRow(row: Record<string, any>, index: num
     requires_review: false,
     audit_trail: [
       { timestamp: now, event_type: 'ENRICHMENT_COMPLETE', actor: 'SYSTEM', description: `Enriched product ${prodId}` }
-    ]
-  };
+    ],
     created_at: now,
     updated_at: now
   };
