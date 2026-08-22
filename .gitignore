@@ -1,0 +1,54 @@
+# Environment & Secret Files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+
+# Python Byte-code & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+pytest-cache-files-*/
+.coverage
+htmlcov/
+.nox/
+.hypothesis/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Node.js & Next.js Build Artifacts
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+.npm
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime Storage & Data Files
+backend/storage_data/inputs/*
+backend/storage_data/outputs/*
+backend/storage_data/documents/*
+backend/storage_data/images/*
+backend/storage_data/products/*
+backend/storage_data/evaluation/*
+backend/storage_data/reports/*
+!backend/storage_data/**/.gitkeep
+
+# IDEs & System Files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
