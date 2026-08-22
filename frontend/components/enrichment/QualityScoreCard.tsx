@@ -15,14 +15,14 @@ export const QualityScoreCard: React.FC<QualityScoreCardProps> = ({ quality }) =
   const overallScore = quality.overall_score ?? 0;
   const status = quality.status || 'PASS';
 
-  const subScores = (quality as any).sub_scores || {};
-  const breakdown = quality.breakdown || {};
+  const subScores = (quality as any)?.sub_scores || {};
+  const breakdown = quality.breakdown;
 
-  const classScore = breakdown.classification ?? subScores.classification ?? 85;
-  const brandScore = breakdown.brand ?? subScores.brand_normalization ?? 90;
-  const lovScore = breakdown.lov ?? subScores.attributes ?? 80;
-  const uomScore = breakdown.uom ?? subScores.attributes ?? 95;
-  const descScore = breakdown.descriptions ?? subScores.descriptions ?? 85;
+  const classScore = breakdown?.classification ?? subScores.classification ?? 85;
+  const brandScore = breakdown?.brand ?? subScores.brand_normalization ?? 90;
+  const lovScore = breakdown?.lov ?? subScores.attributes ?? 80;
+  const uomScore = breakdown?.uom ?? subScores.attributes ?? 95;
+  const descScore = breakdown?.descriptions ?? subScores.descriptions ?? 85;
 
   const getScoreColor = (score: number) => {
     if (score >= 90) return 'text-emerald-600 dark:text-emerald-400';
