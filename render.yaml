@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: sortlog-iq-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run_backend.py
+    envVars:
+      - key: APP_ENV
+        value: production
